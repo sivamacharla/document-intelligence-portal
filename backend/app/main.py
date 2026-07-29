@@ -1,7 +1,11 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 
 from . import models
@@ -39,3 +43,20 @@ def admin_stats(db: Session = Depends(get_db), _=Depends(require_role("admin")))
         "total_documents": db.query(models.Document).count(),
         "total_chat_messages": db.query(models.ChatMessage).count(),
     }
+
+
+# Serve the built Angular app (frontend/dist/frontend/browser) from the same
+# origin/process in production, so the whole app is a single deployable
+# service with no CORS to worry about. Falls back to index.html for any
+# non-API path so Angular's client-side router handles it (SPA routing).
+FRONTEND_DIST = Path(__file__).resolve().parent.parent.parent / "frontend" / "dist" / "frontend" / "browser"
+
+if FRONTEND_DIST.exists():
+    app.mount("/assets", StaticFiles(directory=FRONTEND_DIST / "assets"), name="assets") if (FRONTEND_DIST / "assets").exists() else None
+
+    @app.get("/{full_path:path}")
+    def spa(full_path: str):
+        candidate = FRONTEND_DIST / full_path
+        if full_path and candidate.is_file():
+            return FileResponse(candidate)
+        return FileResponse(FRONTEND_DIST / "index.html")

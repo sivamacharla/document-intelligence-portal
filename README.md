@@ -1,5 +1,12 @@
 # Enterprise AI Document Intelligence Portal
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/sivamacharla/document-intelligence-portal)
+
+Note: on Render's free tier the service sleeps after 15 minutes of
+inactivity, so the first request after a while takes ~30-50s to wake up.
+After deploying, register your own account at `/` — there's no seeded demo
+login since data resets whenever the free-tier instance restarts.
+
 A full-stack AI-powered document intelligence platform: upload documents,
 then search and query them through a conversational chatbot with
 role-based access control.

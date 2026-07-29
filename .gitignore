@@ -8,5 +8,6 @@ backend/server.log
 backend/.env
 
 frontend/node_modules/
-frontend/dist/
 frontend/.angular/
+# frontend/dist/ is intentionally committed: Render's Python runtime has no
+# Node/npm step, so the backend serves this pre-built Angular output directly.
