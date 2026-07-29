@@ -1,0 +1,37 @@
+<div class="auth-card">
+  <h1>Document Intelligence Portal</h1>
+  <p class="subtitle">{{ mode() === 'login' ? 'Sign in to your account' : 'Create a new account' }}</p>
+
+  <form (ngSubmit)="submit()">
+    <label>
+      Email
+      <input type="email" name="email" [(ngModel)]="email" required />
+    </label>
+    <label>
+      Password
+      <input type="password" name="password" [(ngModel)]="password" required />
+    </label>
+
+    @if (mode() === 'register') {
+      <label>
+        Role
+        <select name="role" [(ngModel)]="role">
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+      </label>
+    }
+
+    @if (error()) {
+      <div class="error">{{ error() }}</div>
+    }
+
+    <button type="submit" [disabled]="loading()">
+      {{ loading() ? 'Please wait…' : (mode() === 'login' ? 'Sign in' : 'Register') }}
+    </button>
+  </form>
+
+  <button class="link-btn" (click)="toggleMode()">
+    {{ mode() === 'login' ? "Need an account? Register" : 'Already have an account? Sign in' }}
+  </button>
+</div>

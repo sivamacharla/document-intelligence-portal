@@ -1,0 +1,15 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:////app/data/app.db
+      - JWT_SECRET=change-me-in-production
+    volumes:
+      - backend-uploads:/app/uploads
+      - backend-data:/app/data
+
+volumes:
+  backend-uploads:
+  backend-data:

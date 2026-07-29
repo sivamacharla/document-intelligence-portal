@@ -1,0 +1,27 @@
+<div class="panel">
+  <div class="panel-head">
+    <h2>Documents</h2>
+    <label class="upload-btn">
+      {{ uploading() ? 'Uploading…' : 'Upload' }}
+      <input type="file" (change)="onFileSelected($event)" accept=".pdf,.docx,.txt" hidden [disabled]="uploading()" />
+    </label>
+  </div>
+
+  @if (error()) {
+    <div class="error">{{ error() }}</div>
+  }
+
+  <ul class="doc-list">
+    @for (doc of documents(); track doc.id) {
+      <li>
+        <div>
+          <div class="filename">{{ doc.filename }}</div>
+          <div class="meta">{{ doc.chunk_count }} chunks · {{ doc.content_type }}</div>
+        </div>
+        <button class="remove-btn" (click)="remove(doc.id)">Remove</button>
+      </li>
+    } @empty {
+      <li class="empty">No documents yet — upload a PDF, Word doc, or text file to start chatting with it.</li>
+    }
+  </ul>
+</div>

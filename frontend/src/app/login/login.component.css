@@ -1,0 +1,77 @@
+.auth-card {
+  max-width: 380px;
+  margin: 80px auto;
+  background: #171923;
+  border: 1px solid #2a2e3a;
+  border-radius: 12px;
+  padding: 32px;
+}
+
+h1 {
+  font-size: 18px;
+  margin: 0 0 4px;
+}
+
+.subtitle {
+  color: #9aa0aa;
+  font-size: 13px;
+  margin: 0 0 24px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: #c8ccd4;
+}
+
+input,
+select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #2a2e3a;
+  background: #0f1117;
+  color: #e6e6e6;
+  font-size: 14px;
+}
+
+button[type='submit'] {
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #4f7cff;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button[type='submit']:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.link-btn {
+  display: block;
+  margin: 16px auto 0;
+  background: none;
+  border: none;
+  color: #6ec6e7;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.error {
+  background: #3a1e1e;
+  color: #ef8f8f;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+}

@@ -1,0 +1,53 @@
+.admin-wrap {
+  padding: 24px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.brand {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.back-link {
+  color: #6ec6e7;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.cards {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #171923;
+  border: 1px solid #2a2e3a;
+  border-radius: 10px;
+  padding: 20px 24px;
+  min-width: 180px;
+}
+
+.label {
+  color: #9aa0aa;
+  font-size: 12px;
+}
+
+.value {
+  font-size: 28px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.note {
+  margin-top: 24px;
+  color: #9aa0aa;
+  font-size: 12px;
+  max-width: 500px;
+}

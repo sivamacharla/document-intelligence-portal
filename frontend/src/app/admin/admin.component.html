@@ -1,0 +1,24 @@
+<div class="admin-wrap">
+  <header class="topbar">
+    <div class="brand">Admin dashboard</div>
+    <a routerLink="/chat" class="back-link">← Back to chat</a>
+  </header>
+
+  @if (stats(); as s) {
+    <div class="cards">
+      <div class="card">
+        <div class="label">Total users</div>
+        <div class="value">{{ s.total_users }}</div>
+      </div>
+      <div class="card">
+        <div class="label">Total documents</div>
+        <div class="value">{{ s.total_documents }}</div>
+      </div>
+      <div class="card">
+        <div class="label">Total chat messages</div>
+        <div class="value">{{ s.total_chat_messages }}</div>
+      </div>
+    </div>
+    <p class="note">This page is only reachable with role = admin — both client-side (route guard) and server-side (RBAC dependency on <code>/admin/stats</code>).</p>
+  }
+</div>
