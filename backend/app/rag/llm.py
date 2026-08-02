@@ -20,9 +20,19 @@ _STOPWORDS = {
 }
 
 
+def _is_bare_heading(sentence: str) -> bool:
+    """Filters out section headers like 'EXPERIENCE' or 'PROJECTS' that
+    survive PDF/DOCX extraction as their own line -- they can keyword-match
+    a question (e.g. "experience") without containing any actual answer.
+    """
+    words = sentence.split()
+    return len(words) <= 3 and sentence == sentence.upper() and any(c.isalpha() for c in sentence)
+
+
 def _split_sentences(text: str) -> list[str]:
     parts = re.split(r"(?<=[.!?])\s+|\n+|(?<=•)\s+|(?<=●)\s+", text)
-    return [p.strip(" •●-•") for p in parts if p.strip(" •●-•")]
+    cleaned = [p.strip(" •●-•") for p in parts if p.strip(" •●-•")]
+    return [s for s in cleaned if not _is_bare_heading(s)]
 
 
 def _keywords(text: str) -> set[str]:

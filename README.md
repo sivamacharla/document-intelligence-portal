@@ -21,6 +21,13 @@ role-based access control.
   drop-in change.
 - **RAG pipeline** (`app/rag/`):
   - `chunking.py` — parses PDF/DOCX/TXT and splits into overlapping chunks.
+    PDF extraction gets a de-wrapping pass first: `pypdf` emits one line per
+    visual line in the source PDF, including mid-sentence wraps, which
+    otherwise get mistaken for sentence boundaries downstream and produce
+    truncated answers (e.g. "...using LangChain and"). Lines without
+    terminal punctuation are rejoined with the next line; headings and
+    bullets are kept on their own line instead of fusing with the text
+    that follows them.
   - `embeddings.py` — pluggable embedder; deterministic hashed
     bag-of-words by default (offline, no download), or real
     `sentence-transformers` via `EMBEDDING_PROVIDER=huggingface`.
