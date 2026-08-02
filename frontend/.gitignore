@@ -1,7 +1,9 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
 # Compiled output
-/dist
+# /dist is intentionally NOT ignored here: Render's Python-only build has no
+# Node/npm step, so the backend serves this pre-built output directly. Keep
+# it committed (see ../.gitignore for the matching note).
 /tmp
 /out-tsc
 /bazel-out

@@ -15,7 +15,7 @@
         @for (msg of messages(); track $index) {
           <div class="msg" [class.user]="msg.role === 'user'">
             <div class="bubble">
-              {{ msg.content }}
+              <span [innerHTML]="renderContent(msg)"></span>
               @if (msg.sources && msg.sources.length) {
                 <div class="sources">
                   @for (s of msg.sources; track s.document_id) {

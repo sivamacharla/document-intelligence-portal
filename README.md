@@ -29,6 +29,13 @@ role-based access control.
     isn't installed), so retrieval never crosses account boundaries.
   - `llm.py` — answer generation from retrieved chunks; offline
     extractive mock by default, real model via `LLM_PROVIDER=openai`.
+    Tags each used sentence with an inline `[n]` marker pointing at the
+    specific source chunk it came from, so citations are numbered instead
+    of just listing every retrieved chunk underneath.
+- **Streaming** (`routers/chat.py`, `/chat/query/stream`) — the computed
+  answer is delivered word-by-word over Server-Sent Events instead of as
+  one blocking response, so the chat UI shows the answer typing in
+  incrementally.
 - **Data** — SQLAlchemy models (`User`, `Document`, `ChatMessage`) on
   SQLite by default; point `DATABASE_URL` at Postgres for production.
 
@@ -39,7 +46,10 @@ role-based access control.
   user) and `/admin` (role must be `admin`) — mirroring the backend's
   own RBAC check on `/admin/stats`, so the restriction is enforced twice,
   not just hidden in the UI.
-- `chat/` — conversation UI + cited sources per answer.
+- `chat/` — streams the answer in via `fetch` + `ReadableStream` (not
+  `HttpClient`, which doesn't expose incremental chunks the same way),
+  and renders `[n]` markers as hoverable citation badges tied to the
+  actual source used.
 - `documents/` — upload, list, delete.
 - `admin/` — role-gated usage dashboard.
 

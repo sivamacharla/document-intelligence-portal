@@ -94,6 +94,26 @@ nav a {
   border-color: #33487f;
 }
 
+/* ::ng-deep needed because .cite is inside content bound via [innerHTML],
+   which bypasses Angular's normal view-encapsulation attribute scoping. */
+::ng-deep .cite {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 3px;
+  margin-left: 2px;
+  border-radius: 4px;
+  background: #2a3a5f;
+  color: #8fb4ff;
+  font-size: 10px;
+  font-weight: 600;
+  font-style: normal;
+  vertical-align: super;
+  cursor: default;
+}
+
 .sources {
   margin-top: 8px;
   display: flex;
